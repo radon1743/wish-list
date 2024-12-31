@@ -1,0 +1,23 @@
+@if (wishes.length > 0) {
+    <div>
+      <label class="form-check-label">
+        @for (wish of wishes() | filterWishes:searchTerm() ; track wish.wishText) {
+          <li 
+              class="wish-list">
+            <input 
+              type="checkbox"
+              [checked]="wish.isComplete"
+              (change)="this.toggleItem(wish)"
+              id="wish-{{wish.wishText}}"
+            />
+            <label appHighlightFulfilledWishes 
+                   [isCompleted]="wish.isComplete" 
+                   for="wish-{{wish.wishText}}">{{wish.wishText}}</label>
+          </li>
+        }
+      </label>
+    </div>
+  }
+  @else {
+    <p>All your wishes are fulfiled....!!</p>
+  }
