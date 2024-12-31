@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { WishItems } from '../../shared/models/wishItems';
@@ -19,14 +19,21 @@ export class AppComponent {
     
   ]);
   
-  
+
+  searchTerm = signal('0');
+  toggleItem(wish:WishItems){
+    console.log(wish.isComplete);
+    wish.isComplete = !wish.isComplete;
+    console.log(wish.isComplete);
+  }
   addNewWish(newWish:String){
+    
     console.log("new wish added");
     this.wishList.update(wishes =>{
       return [...wishes, new WishItems(newWish,false)];
     });
 
   }
-  
+    
   title = 'wishlist';
 }

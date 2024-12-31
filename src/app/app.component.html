@@ -20,7 +20,16 @@
       <option value="2">Unfulfilled</option>
     </select>
   </div>
-  <div>
-    <app-wish-list [wishes]="wishList"> </app-wish-list>
-  </div>
+  @if (wishList().length > 0) {
+    <div>
+      <label class="form-check-label">
+        @for (wish of wishList() | filterWishes:searchTerm() ; track wish.wishText) {
+          <app-wish-list [wish]="wish"></app-wish-list>
+        }
+      </label>
+    </div>
+  }
+  @else {
+    <p>All your wishes are fulfiled....!!</p>
+  }
 </div>
